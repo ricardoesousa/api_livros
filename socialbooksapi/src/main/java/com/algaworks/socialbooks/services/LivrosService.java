@@ -1,4 +1,4 @@
-package com.algawork.socialbooks.services;
+package com.algaworks.socialbooks.services;
 
 import java.util.List;
 

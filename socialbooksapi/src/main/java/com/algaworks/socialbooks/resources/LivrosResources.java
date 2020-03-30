@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.algawork.socialbooks.services.LivrosService;
+import com.algaworks.socialbooks.services.LivrosService;
 import com.algaworks.socialbooks.domain.Livro;
 
 @RestController

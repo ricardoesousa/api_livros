@@ -3,7 +3,7 @@ package com.algaworks.socialbooks;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication	
 public class SocialbooksapiApplication {
 
 	public static void main(String[] args) {

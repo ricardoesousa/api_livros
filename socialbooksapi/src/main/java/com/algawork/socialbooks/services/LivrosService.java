@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.algaworks.socialbook.services.exceptions.LivroNaoEncontradoException;
 import com.algaworks.socialbooks.domain.Livro;
 import com.algaworks.socialbooks.repository.LivrosRepository;
+import com.algaworks.socialbooks.services.exceptions.LivroNaoEncontradoException;
 
 @Service
 public class LivrosService {
@@ -21,9 +21,9 @@ public class LivrosService {
 	}
 
 	public Livro buscar(Long id) {
-		Livro livro = livrosRepository.findById(id).get();
+		Livro livro = livrosRepository.findById(id).orElse(null);
 		if (livro == null) {
-			throw new LivroNaoEncontradoException("o livro não pode ser encontrado");
+			throw new LivroNaoEncontradoException("o livro não pôde ser encontrado");
 		}
 		return livro;
 	}
@@ -40,12 +40,12 @@ public class LivrosService {
 			throw new LivroNaoEncontradoException("O livro não pode ser encontrado");
 		}
 	}
-	
-	public void atualizar (Livro livro) {
+
+	public void atualizar(Livro livro) {
 		verificarExistencia(livro);
 		livrosRepository.save(livro);
 	}
-	
+
 	private void verificarExistencia(Livro livro) {
 		buscar(livro.getId());
 	}

@@ -25,25 +25,26 @@ public class AutoresResource {
 	@Autowired
 	private AutoresService autoresService;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET, produces = { org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
+			org.springframework.http.MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<List<Autor>> listar() {
 
 		return ResponseEntity.status(HttpStatus.OK).body(autoresService.listar());
 
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> salvar (@Valid @RequestBody Autor autor) {
+	public ResponseEntity<Void> salvar(@Valid @RequestBody Autor autor) {
 		autor = autoresService.salvar(autor);
-		
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(autor.getId()).toUri();
-		
+
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Autor> buscar(@PathVariable("id") Long id) {
 		return ResponseEntity.status(HttpStatus.OK).body(autoresService.buscar(id));
 	}
- 
+
 }

@@ -20,6 +20,7 @@ import com.algaworks.socialbooks.services.AutoresService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @Api(tags = "Autores")
 @RestController
@@ -30,8 +31,8 @@ public class AutoresResource {
 	private AutoresService autoresService;
 
 	@ApiOperation("Lista os Autores")
-	@RequestMapping(method = RequestMethod.GET, produces = { org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
-			org.springframework.http.MediaType.APPLICATION_XML_VALUE })
+	@RequestMapping(method = RequestMethod.GET/*, produces = { org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
+			org.springframework.http.MediaType.APPLICATION_XML_VALUE }*/)
 	public ResponseEntity<List<Autor>> listar() {
 		return ResponseEntity.status(HttpStatus.OK).body(autoresService.listar());
 
@@ -39,7 +40,9 @@ public class AutoresResource {
 	
 	@ApiOperation("Cadastra um novo Autor")
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> salvar(@Valid @RequestBody Autor autor) {
+	public ResponseEntity<Void> salvar(
+			@ApiParam(name = "corpo", value="Representação de um novo Autor")
+			@Valid @RequestBody Autor autor) {
 		autor = autoresService.salvar(autor);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(autor.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -47,7 +50,9 @@ public class AutoresResource {
 
 	@ApiOperation("Busca um Autor por Id")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Autor> buscar(@PathVariable("id") Long id) {
+	public ResponseEntity<Autor> buscar(
+			@ApiParam(value="Id de um Autor", example = "1")
+			@PathVariable("id") Long id) {
 		return ResponseEntity.status(HttpStatus.OK).body(autoresService.buscar(id));
 	}
 

@@ -21,6 +21,9 @@ import com.algaworks.socialbooks.domain.Comentario;
 import com.algaworks.socialbooks.domain.Livro;
 import com.algaworks.socialbooks.services.LivrosService;
 
+import io.swagger.annotations.Api;
+
+@Api(tags = "Livros")
 @RestController
 @RequestMapping("/livros")
 public class LivrosResource {

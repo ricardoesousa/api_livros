@@ -51,12 +51,12 @@ public class LivrosResource {
 
 	@ApiOperation("Busca um livro por Id")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Livro> buscar(
+	public ResponseEntity<?> buscar(
 			@ApiParam(value = "Id de um livro", example="1")
 			@PathVariable("id") Long id) {
 		Livro livro = livrosService.buscar(id);
-		//CacheControl cacheControl = CacheControl.maxAge(20, TimeUnit.SECONDS);
-		return ResponseEntity.status(HttpStatus.OK)./*cacheControl(cacheControl).*/body(livro);
+		CacheControl cacheControl = CacheControl.maxAge(20, TimeUnit.SECONDS);
+		return ResponseEntity.status(HttpStatus.OK).cacheControl(cacheControl).body(livro);
 	}
 
 	@ApiOperation("Exclui um livro por Id")

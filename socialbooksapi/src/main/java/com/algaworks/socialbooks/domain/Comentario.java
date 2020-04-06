@@ -16,9 +16,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
+@ApiModel(value = "Comentário", description = "Representa um comentário")
 public class Comentario {
 
 	@JsonInclude(Include.NON_NULL)
@@ -26,15 +31,18 @@ public class Comentario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@ApiModelProperty(value = "Texto", example = "O livro é ótimo, recomendo!")
 	@Size(max = 1500, message = "O resumo não pode conter mais de 1500 caracteres.")
 	@NotEmpty(message = "O comentário deve ser preenchido.")
 	@JsonInclude(Include.NON_NULL)
 	@JsonProperty("comentario")
 	private String texto;
 	
+	@ApiModelProperty(value = "Usuário", example = "ricardo.sousa")
 	@JsonInclude(Include.NON_NULL)
 	private String usuario;
 	
+	@ApiModelProperty(value = "Data", example = "03/04/2020")
 	@JsonInclude(Include.NON_NULL)
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date data;
